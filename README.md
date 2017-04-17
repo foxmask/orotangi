@@ -13,7 +13,7 @@ The minimum are the following :
 * [Django Rest Framework](http://www.django-rest-framework.org/) == 3.6.2
 * [Django](https://www.djangoproject.com/) 1.11
 * [django-cors-headers](https://pypi.python.org/pypi/django-cors-headers) == 2.0.2
-
+* [django-filter](https://pypi.python.org/pypi/django-filter) == 1.0.2
 
 
 Installation

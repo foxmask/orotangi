@@ -17,4 +17,3 @@ def logout_view(request):
 def base(request):
     html = TemplateResponse(request, 'base.html')
     return HttpResponse(html.render())
-
