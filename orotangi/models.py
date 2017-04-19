@@ -36,7 +36,7 @@ class Notes(models.Model):
     status = models.BooleanField(default=True)
 
     def __str__(self):
-        return "%s - %s" % (self.title, self.book)
+        return "%s - %s" % (self.book, self.title)
 
     class Meta:
         ordering = ('-date_created', )
