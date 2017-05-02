@@ -2,6 +2,7 @@ from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 
 from orotangi.api.serializers import NoteSerializer, BookSerializer
+from orotangi.api.permissions import DjangoModelPermissions
 from orotangi.models import Books, Notes
 
 from rest_framework import viewsets
@@ -42,13 +43,15 @@ class UserMixin(viewsets.GenericViewSet):
 
 class NoteViewSet(UserMixin, viewsets.ModelViewSet):
     """
-    This viewset provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    This viewset provides `list`, `create`, `retrieve`, `update`
+    and `destroy` actions.
     """
     queryset = Notes.objects.all()
     serializer_class = NoteSerializer
     pagination_class = NoteResultsSetPagination
     # filter the notes
     filter_backends = (DjangoFilterBackend,)
+    permission_classes = (DjangoModelPermissions, )
 
     def get_queryset(self):
         """
@@ -76,9 +79,10 @@ class NoteViewSet(UserMixin, viewsets.ModelViewSet):
 
 class BookViewSet(UserMixin, viewsets.ModelViewSet):
     """
-    This viewset provides `list`, `create`, `retrieve`, `update` and `destroy` actions.
+    This viewset provides `list`, `create`, `retrieve`, `update`
+    and `destroy` actions.
     """
     queryset = Books.objects.all()
     serializer_class = BookSerializer
     pagination_class = BookResultsSetPagination
-
+    permission_classes = (DjangoModelPermissions, )

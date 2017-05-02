@@ -25,7 +25,8 @@ class Command(BaseCommand):
                 filename, file_extension = os.path.splitext(file)
                 if file_extension == '.data' or file_extension == '.bak':
                     continue
-                with io.open(os.path.join(folder, file), 'r', encoding='utf-8') as src:
+                with io.open(os.path.join(folder, file), 'r',
+                             encoding='utf-8') as src:
                     title = src.readline()[2:]
                     content = src.read()
 

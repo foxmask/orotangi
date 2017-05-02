@@ -1,0 +1,12 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    raise ImportError
+    except AttributeError
+
+[run]
+omit =
+    */migrations/*
+    setup.py
+    orotangi/wsgi.py
+    orotangi/management/commands/*
