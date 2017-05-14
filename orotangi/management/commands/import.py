@@ -33,6 +33,7 @@ class Command(BaseCommand):
                     title = src.readline().strip()
                     created = src.readline().strip()
                     updated = src.readline().strip()
+                    title = title.split('=')[1]
                     created = dateutil.parser.parse(created.split('=')[1])
                     updated = dateutil.parser.parse(updated.split('=')[1])
                     content = src.read()
