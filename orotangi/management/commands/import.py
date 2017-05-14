@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 import os
 import io
+import dateutil.parser
 # django
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
@@ -25,12 +26,19 @@ class Command(BaseCommand):
                 filename, file_extension = os.path.splitext(file)
                 if file_extension == '.data' or file_extension == '.bak':
                     continue
+
                 with io.open(os.path.join(folder, file), 'r',
                              encoding='utf-8') as src:
-                    title = src.readline()[2:]
+
+                    title = src.readline().strip()
+                    created = src.readline().strip()
+                    updated = src.readline().strip()
+                    created = dateutil.parser.parse(created.split('=')[1])
+                    updated = dateutil.parser.parse(updated.split('=')[1])
                     content = src.read()
 
-                    yield {'title': title, 'content': content}
+                    yield {'title': title, 'content': content,
+                           'created': created, 'updated': updated}
 
     def add_arguments(self, parser):
         parser.add_argument('user_id', type=int)
@@ -49,15 +57,17 @@ class Command(BaseCommand):
                           'user': user}
             )
             for note in self.data(options['path']):
-                print(note['title'])
+                defaults = {'title': note['title'],
+                            'content': note['content'],
+                            'status': True,
+                            'user': user,
+                            'date_created': note['created'],
+                            'date_modified': note['updated']}
                 obj, created = Notes.objects.get_or_create(
                     title=note['title'],
                     book=book_obj,
                     user=options['user_id'],
-                    defaults={'title': note['title'],
-                              'content': note['content'],
-                              'status': True,
-                              'user': user},
+                    defaults=defaults,
                 )
         except User.DoesNotExist:
             print("user does not exist")

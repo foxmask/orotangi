@@ -6,6 +6,8 @@ from orotangi.models import Books, Notes
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 
+import datetime
+
 
 class OrotangiTests(APITestCase):
 
@@ -84,6 +86,8 @@ class NotesTests(OrotangiTests):
                 'content': 'this is my note',
                 'url': '',
                 'status': True,
+                'date_created': datetime.datetime.now(),
+                'date_modified': datetime.datetime.now(),
                 }
 
         url = reverse('notes-list')

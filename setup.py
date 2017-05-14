@@ -5,7 +5,8 @@ install_requires = [
     'Django==1.11',
     'djangorestframework==3.6.2',
     'django-cors-headers==2.0.2',
-    'django-filter==1.0.2'
+    'django-filter==1.0.2',
+    'python-dateutil==2.6.0'
 ]
 
 setup(
