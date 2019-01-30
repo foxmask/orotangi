@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from orotangi import __version__ as version
 
 install_requires = [
-    'Django==1.11',
+    'Django==1.11.18',
     'djangorestframework==3.6.2',
     'django-cors-headers==2.0.2',
     'django-filter==1.0.2',
